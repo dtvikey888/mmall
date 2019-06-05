@@ -26,6 +26,7 @@ public class UserController {
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
     public Object login(String username, String password, HttpSession session){
+        //service-->mybatis-->dao
 
 
 
