@@ -1,6 +1,7 @@
 *.class
-
+ccc
 #package file
+
 *.war
 *.ear
 
@@ -22,7 +23,7 @@ target/
 *.iml
 *.iws
 
-#temp file
+# temp file
 
 *.log
 *.cache
