@@ -1,6 +1,7 @@
 package com.mmall.controller.portal;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 import com.mmall.service.IUserService;
@@ -133,7 +134,7 @@ public class UserController {
 
 
     /**
-     *
+     * 重置密码
      * @param session
      * @param passwordOld
      * @param passwordNew
@@ -149,7 +150,45 @@ public class UserController {
         return iUserService.resetPassword(passwordOld,passwordNew,user);
     }
 
+    /**
+     * 更新个人信息
+     * @param session
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "update_information.do",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<User> update_information(HttpSession session,User user){
+        User currentUser= (User) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser==null){
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        user.setId(currentUser.getId());
+        user.setUsername(currentUser.getUsername());
+        ServerResponse<User> response = iUserService.updateInformation(user);
+        if (response.isSuccess()){
+            session.setAttribute(Const.CURRENT_USER,response.getData());
+        }
 
+        return response;
+    }
 
+    /**
+     * 获取用户详细信息
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "get_information.do",method = RequestMethod.GET)
+    @ResponseBody
+    public ServerResponse<User> get_information(HttpSession session){
+
+        User currentUser= (User) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录，需要强制登录status=10");
+        }
+
+        return iUserService.getInformation(currentUser.getId());
+
+    }
 
 }
