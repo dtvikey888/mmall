@@ -141,8 +141,49 @@ public class ProductManageController {
             fileMap.put("uri",targetFileName);
             fileMap.put("url",url);
             return ServerResponse.createBySuccess(fileMap);
+
         }else {
+
             return ServerResponse.createByErrorMessage("无权限操作");
+
+        }
+
+    }
+
+    @RequestMapping("richtext_img_upload.do")
+    @ResponseBody
+    public Map richtextImgUpload(HttpSession session,@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request){
+
+        Map resultMap = Maps.newHashMap();
+
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user==null){
+            resultMap.put("success",false);
+            resultMap.put("msg","");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录管理员");
+        }
+
+        //富文本中对于返回值有自己的要求,我们使用是simditor所以按照simditor的要求进行返回
+//        {
+//            "success": true/false,
+//                "msg": "error message", # optional
+//            "file_path": "[real file path]"
+//        }
+
+        if (iUserService.checkAdminRole(user).isSuccess()){
+            String path = request.getSession().getServletContext().getRealPath("upload");
+            String targetFileName = iFileService.upload(file,path);
+            String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
+
+            Map fileMap = Maps.newHashMap();
+            fileMap.put("uri",targetFileName);
+            fileMap.put("url",url);
+            return ServerResponse.createBySuccess(fileMap);
+
+        }else {
+
+            return ServerResponse.createByErrorMessage("无权限操作");
+
         }
 
     }
