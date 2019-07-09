@@ -159,8 +159,8 @@ public class ProductManageController {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user==null){
             resultMap.put("success",false);
-            resultMap.put("msg","");
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录管理员");
+            resultMap.put("msg","请登录管理员");
+            return resultMap;
         }
 
         //富文本中对于返回值有自己的要求,我们使用是simditor所以按照simditor的要求进行返回
@@ -173,6 +173,9 @@ public class ProductManageController {
         if (iUserService.checkAdminRole(user).isSuccess()){
             String path = request.getSession().getServletContext().getRealPath("upload");
             String targetFileName = iFileService.upload(file,path);
+            if (targetFileName){
+
+            }
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
 
             Map fileMap = Maps.newHashMap();
@@ -181,8 +184,9 @@ public class ProductManageController {
             return ServerResponse.createBySuccess(fileMap);
 
         }else {
-
-            return ServerResponse.createByErrorMessage("无权限操作");
+            resultMap.put("success",false);
+            resultMap.put("msg","无权限操作");
+            return resultMap;
 
         }
 
