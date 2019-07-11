@@ -213,8 +213,14 @@ public class ProductServiceImpl implements IProductService {
         PageHelper.startPage(pageNum,pageSize);
         //排序处理
         if (StringUtils.isNotBlank(orderBy)){
-            
+            if (Const.ProductListOrderBy.PRICE_ASC_DESC.contains(orderBy)){
+                String[] orderByArray = orderBy.split("_");
+                PageHelper.orderBy(orderByArray[0]+" "+orderByArray[1]);
+
+            }
         }
+
+        List<Product> productList =
 
     }
 
