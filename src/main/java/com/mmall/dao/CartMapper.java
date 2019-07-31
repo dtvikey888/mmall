@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CartMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Cart record);
@@ -21,4 +22,9 @@ public interface CartMapper {
     Cart selectCartByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
 
     List<Cart> selectCartByUserId(Integer userId);
+
+    int selectCartProductCheckedStatusByUserId(Integer userId);
+
+
+
 }
