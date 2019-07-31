@@ -107,14 +107,17 @@ public class CartServiceImpl implements ICartService {
 
         cartVo.setCartTotalPrice(cartTotalPrice);
         cartVo.setCartProductVoList(cartProductVoList);
-        cartVo.setAllChecked();
-        return null;
+        cartVo.setAllChecked(this.getAllCheckedStatus(userId));
+
+        return cartVo;
+
     }
 
     private boolean getAllCheckedStatus(Integer userId){
-        if (userId==null){
+        if(userId == null){
             return false;
         }
-        return cartMapper.selectCartProductCheckedStatusByUserId();
+        return cartMapper.selectCartProductCheckedStatusByUserId(userId) == 0;
     }
+
 }
