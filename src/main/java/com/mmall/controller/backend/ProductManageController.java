@@ -90,7 +90,6 @@ public class ProductManageController {
         }else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
-
     }
 
     @RequestMapping("list.do")
