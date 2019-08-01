@@ -10,4 +10,5 @@ import org.springframework.stereotype.Service;
  */
 @Service("iShippingService")
 public class ShippingServiceImpl implements IShippingService {
+
 }

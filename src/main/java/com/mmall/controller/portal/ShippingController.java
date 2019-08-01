@@ -16,11 +16,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/shipping/")
 public class ShippingController {
+
     @Autowired
     private IShippingService iShippingService;
 
     public ServerResponse add(HttpSession session, Shipping shipping){
-        
+
     }
 
 }
