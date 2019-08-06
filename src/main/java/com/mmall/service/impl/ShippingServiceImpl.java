@@ -23,6 +23,7 @@ public class ShippingServiceImpl implements IShippingService {
     private ShippingMapper shippingMapper;
 
     public ServerResponse add(Integer userId, Shipping shipping){
+
         shipping.setUserId(userId);
         int rowCount=shippingMapper.insert(shipping);
         if (rowCount>0){
@@ -34,4 +35,26 @@ public class ShippingServiceImpl implements IShippingService {
         return ServerResponse.createByErrorMessage("新建地址失败");
 
     }
+
+    public ServerResponse del(Integer userId,Integer shippingId){
+        int resultCount = shippingMapper.deleteByShippingIdUserId(userId,shippingId);
+        if (resultCount>0){
+            ServerResponse.createBySuccess("删除地址成功");
+        }
+        return ServerResponse.createByErrorMessage("删除地址失败");
+    }
+
+
+    public ServerResponse update(Integer userId, Shipping shipping){
+
+        shipping.setUserId(userId);
+        int rowCount=shippingMapper.insert(shipping);
+        if (rowCount>0){
+            return ServerResponse.createBySuccess("更新地址成功");
+        }
+
+        return ServerResponse.createByErrorMessage("更新地址失败");
+
+    }
+
 }
