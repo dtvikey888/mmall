@@ -11,5 +11,6 @@ import javax.servlet.http.HttpSession;
  * @Version 1.0
  */
 public interface IShippingService {
-
+    ServerResponse add(Integer userId, Shipping shipping);
+    ServerResponse del(Integer userId,Integer shippingId);
 }
