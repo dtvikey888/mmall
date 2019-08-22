@@ -245,6 +245,12 @@
       <version>2.9.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+    </dependency>
+
     <!-- mybatis-generator-core 反向生成java代码-->
     <dependency>
       <groupId>org.mybatis.generator</groupId>
