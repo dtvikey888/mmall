@@ -16,8 +16,4 @@ public class Lombok {
         this.userName = userName;
     }
 
-
-
-
-
 }
