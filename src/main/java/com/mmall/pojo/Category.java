@@ -8,7 +8,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-@ToString(exclude = "updateTime")
 public class Category {
     private Integer id;
 
