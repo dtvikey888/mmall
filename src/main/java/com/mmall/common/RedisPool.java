@@ -6,7 +6,10 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
-<<<<<<< HEAD
+ 关于使用Github,gitignore不起作用的解决方法
+ 1. git rm -r --cached .
+ 2. git add .
+ 3. git commit -m 'update .gitignore'
  * @Author: dtvikey
  * @Date: 26/08/19 上午 10:34
  * @Version 1.0
