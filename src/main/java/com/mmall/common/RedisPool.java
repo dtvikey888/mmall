@@ -58,6 +58,7 @@ public class RedisPool {
 
     public static void main(String[] args) {
         Jedis jedis = pool.getResource();
+        jedis.set("geelykey","geelyvalue");
     }
 
 }
