@@ -6,6 +6,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
+<<<<<<< HEAD
  * @Author: dtvikey
  * @Date: 26/08/19 上午 10:34
  * @Version 1.0
@@ -45,19 +46,18 @@ public class RedisPool {
 
     public static void returnBrokenResource(Jedis jedis){
 
-            pool.returnBrokenResource(jedis);
+        pool.returnBrokenResource(jedis);
 
     }
 
     public static void returnResource(Jedis jedis){
 
-            pool.returnResource(jedis);
+        pool.returnResource(jedis);
 
     }
 
     public static void main(String[] args) {
         Jedis jedis = pool.getResource();
     }
-
 
 }
