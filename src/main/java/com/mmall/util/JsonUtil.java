@@ -55,12 +55,16 @@ public class JsonUtil {
         }
 
         try {
+            System.out.printf("kk");
             return clazz.equals(String.class)? (T)str : objectMapper.readValue(str,clazz);
         } catch (Exception e) {
             log.warn("Parse String to Object error");
             return null;
+
         }
+
     }
+
 
 
 
