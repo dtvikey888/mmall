@@ -1,5 +1,6 @@
 package com.mmall.util;
 
+import com.mmall.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -35,6 +36,19 @@ public class JsonUtil {
 
     }
 
+    public static <T> String obj2String(T obj){
+        if (obj==null){
+            return null;
+
+        }
+        try {
+            return obj instanceof String ? (String)obj:objectMapper.writeValueAsString(obj);
+        } catch (Exception e) {
+            log.warn("parse Object to String error",e);
+            return null;
+        }
+    }
+
     public static <T> String obj2StringPretty(T obj){
         if (obj==null){
             return null;
@@ -43,14 +57,14 @@ public class JsonUtil {
         try {
             return obj instanceof String ? (String)obj:objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (Exception e) {
-            log.warn("parse Object to String error",e);
+            log.warn("parse Object to String Pretty error",e);
             return null;
         }
     }
 
 
     public static <T> T string2Obj(String str,Class<T> clazz){
-        if(StringUtils.isEmpty(str)){
+        if(StringUtils.isEmpty(str)||clazz==null){
             return null;
         }
 
@@ -64,6 +78,17 @@ public class JsonUtil {
 
     }
 
+
+    public static void main(String[] args) {
+        User u1 = new User();
+        u1.setId(1);
+        u1.setEmail("dtvikey@qq.com");
+
+        String user1Json = JsonUtil.obj2String(u1);
+        String user1JsonPretty = JsonUtil.obj2StringPretty(u1);
+        log.info("user1Json:()",user1Json);
+        log.info("user1JsonPretty:{}",user1JsonPretty);
+    }
 
 
 
