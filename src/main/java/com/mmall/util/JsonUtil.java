@@ -1,5 +1,6 @@
 package com.mmall.util;
 
+import com.google.common.collect.Lists;
 import com.mmall.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +11,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Slf4j
 public class JsonUtil {
@@ -84,10 +86,30 @@ public class JsonUtil {
         u1.setId(1);
         u1.setEmail("dtvikey@qq.com");
 
+        User u2 = new User();
+        u2.setId(2);
+        u2.setEmail("dtvikey2@qq.com");
+
         String user1Json = JsonUtil.obj2String(u1);
         String user1JsonPretty = JsonUtil.obj2StringPretty(u1);
         log.info("user1Json:()",user1Json);
         log.info("user1JsonPretty:{}",user1JsonPretty);
+
+        User user = JsonUtil.string2Obj(user1Json,User.class);
+
+        List<User> userList = Lists.newArrayList();
+        userList.add(u1);
+        userList.add(u2);
+
+        String userListStr = JsonUtil.obj2StringPretty(userList);
+
+        log.info("======================");
+
+        log.info(userListStr);
+
+        List<User> userListObj1 = JsonUtil.string2Obj(userListStr,List.class);
+
+        System.out.println("end");
     }
 
 
